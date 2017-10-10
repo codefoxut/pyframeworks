@@ -21,6 +21,7 @@ parts/
 sdist/
 var/
 wheels/
+.idea/
 *.egg-info/
 .installed.cfg
 *.egg
@@ -99,3 +100,4 @@ ENV/
 
 # mypy
 .mypy_cache/
+django_proj/settings/dev.py
