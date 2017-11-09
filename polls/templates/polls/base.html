@@ -1,6 +1,14 @@
 {% extends 'admin/index.html' %}
+{% load static %}
+{% block extrahead %}
+{{ block.super }}
 
+<link rel="stylesheet" type="text/css" href="{% static 'polls/style.css' %}" />
+{% endblock %}
 {% block title %} {%if not title %}Polls App{% else %} {{title}} {% endif %}{% endblock %}
 
+{% block branding %}
+<h1 id="site-name"><a href="{% url 'polls:index' %}">Simple Polls</a></h1>
+{% endblock %}
 {% block sidebar %}
 {% endblock %}
