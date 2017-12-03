@@ -101,3 +101,7 @@ ENV/
 # mypy
 .mypy_cache/
 django_proj/settings/dev.py
+
+*~
+/static
+.DS_Store

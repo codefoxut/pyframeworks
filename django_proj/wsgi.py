@@ -8,6 +8,15 @@ https://docs.djangoproject.com/en/1.11/howto/deployment/wsgi/
 """
 
 import os
+import sys
+
+PROJECT_DIR = os.path.dirname(os.path.abspath(__file__))
+
+BASE_DIR = os.path.dirname(PROJECT_DIR)
+if PROJECT_DIR not in sys.path:
+    sys.path.insert(0, PROJECT_DIR)
+if BASE_DIR not in sys.path:
+    sys.path.insert(1, BASE_DIR)
 
 from django.core.wsgi import get_wsgi_application
 
