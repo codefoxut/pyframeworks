@@ -1,53 +1,32 @@
-<!DOCTYPE html>
-{% load staticfiles %}
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>My Blog</title>
-    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
-    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
-    <link href="//fonts.googleapis.com/css?family=Lobster&subset=latin,latin-ext" rel="stylesheet" type="text/css">
-    <link rel="stylesheet" href="{% static 'blog/css/blog.css' %}">
-</head>
-<body>
-    <div class="page-header">
-        <h1><a href="/">My Blog</a></h1>
-    </div>
+{% extends 'blog/base.html' %}
+{% block content %}
 
-    <div class="content container">
-        <div class="row">
-            <div class="col-md-8">
-
-                <div class="post">
-                    <div class="date">
-                        <p>published: 14.06.2014, 12:14</p>
-                    </div>
-                    <h2><a href="#">My first post</a></h2>
-                    <p>Aenean eu leo quam. Pellentesque ornare sem lacinia quam venenatis vestibulum. Donec id elit non mi porta gravida
-                        at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo
-                        sit amet risus.</p>
-                </div>
-
-                <div class="post">
-                    <div class="date">
-                        <p>published: 14.06.2014, 12:14</p>
-                    </div>
-                    <h2><a href="#">My second post</a></h2>
-                    <p>Aenean eu leo quam. Pellentesque ornare sem lacinia quam venenatis vestibulum. Donec id elit non mi porta gravida
-                        at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut f.</p>
-                </div>
-
-                {% for post in posts %}
-                <div class="post">
-                    <div class="date">
-                        <p>published: {{ post.published_date }}</p>
-                    </div>
-                    <h2><a href="#">{{ post.title }}</a></h2>
-                    <p>{{ post.text|linebreaksbr }}</p>
-                </div>
-                {% endfor %}
-            </div>
+    <div class="post">
+        <div class="date">
+            <p>published: 14.06.2014, 12:14</p>
         </div>
+        <h2><a href="#">My first post</a></h2>
+        <p>Aenean eu leo quam. Pellentesque ornare sem lacinia quam venenatis vestibulum. Donec id elit non mi porta gravida
+            at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo
+            sit amet risus.</p>
     </div>
-</body>
-</html>
+
+    <div class="post">
+        <div class="date">
+            <p>published: 14.06.2014, 12:14</p>
+        </div>
+        <h2><a href="#">My second post</a></h2>
+        <p>Aenean eu leo quam. Pellentesque ornare sem lacinia quam venenatis vestibulum. Donec id elit non mi porta gravida
+            at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut f.</p>
+    </div>
+
+    {% for post in posts %}
+    <div class="post">
+        <div class="date">
+            <p>published: {{ post.published_date }}</p>
+        </div>
+        <h2><a href="#">{{ post.title }}</a></h2>
+        <p>{{ post.text|linebreaksbr }}</p>
+    </div>
+    {% endfor %}
+{% endblock %}
