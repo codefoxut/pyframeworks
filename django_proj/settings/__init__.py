@@ -38,7 +38,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'polls.apps.PollsConfig',
+    'polls',
     'blog'
 ]
 
@@ -120,8 +120,14 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/1.11/howto/static-files/
 
 STATIC_URL = '/static/'
+MEDIA_URL = '/'
+STATIC_ROOT = PROJECT_DIR + '/static/'
+
+STATICFILES_DIRS = [
+    os.path.join(PROJECT_DIR, "static"),
+]
 
 try:
-    from dev import *
+    from .dev import *
 except ImportError:
     pass
