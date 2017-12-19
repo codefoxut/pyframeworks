@@ -57,7 +57,10 @@ ROOT_URLCONF = 'django_proj.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [os.path.join(BASE_DIR, 'templates')],
+        'DIRS': [
+            os.path.join(BASE_DIR, 'templates'),
+            os.path.join(PROJECT_DIR, 'templates'),
+        ],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -126,6 +129,8 @@ STATIC_ROOT = PROJECT_DIR + '/static/'
 STATICFILES_DIRS = [
     #os.path.join(PROJECT_DIR, "static"),
 ]
+
+LOGIN_REDIRECT_URL = '/post/'
 
 try:
     from .dev import *

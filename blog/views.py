@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
 
+from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, get_object_or_404, redirect
 from django.utils import timezone
 from blog.models import Post
@@ -18,6 +19,7 @@ def post_detail(request, pk):
     return render(request, 'blog/post_detail.html', {'post': post})
 
 
+@login_required
 def post_new(request):
     form, resp = None, None
     if request.method == "POST":
@@ -36,6 +38,8 @@ def post_new(request):
 
     return resp
 
+
+@login_required
 def post_edit(request, pk):
     resp, form = None, None
     post = get_object_or_404(Post, pk=pk)
@@ -58,15 +62,20 @@ def post_edit(request, pk):
     return resp
 
 
+@login_required
 def post_draft_list(request):
     posts = Post.objects.filter(published_date__isnull=True).order_by('created_date')
     return render(request, 'blog/post_draft_list.html', {'posts': posts})
 
+
+@login_required
 def post_publish(request, pk):
     post = get_object_or_404(Post, pk=pk)
     post.publish()
     return redirect('post_detail', pk=pk)
 
+
+@login_required
 def post_remove(request, pk):
     post = get_object_or_404(Post, pk=pk)
     post.delete()
