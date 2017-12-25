@@ -1,11 +1,22 @@
-amqp==2.2.2
-billiard==3.5.0.3
-celery==4.1.0
-coverage==4.4.1
 Django==1.11
-kombu==4.1.0
 MySQL-python==1.2.5
-pytz==2017.2
-redis==2.10.6
-vine==1.1.4
 virtualenv==15.1.0
+
+# Django REST Framework
+djangorestframework==3.7.7
+
+# Celery with Redis
+amqp==2.2.2
+redis==2.10.6
+celery==4.1.0
+billiard==3.5.0.3
+kombu==4.1.0
+pytz==2017.2
+vine==1.1.4
+
+# Coverage
+coverage==4.4.1
+
+# Code Highlighting
+Pygments==2.2.0
+
