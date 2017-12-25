@@ -17,3 +17,6 @@ vine==1.1.4
 # Coverage
 coverage==4.4.1
 
+# Code Highlighting
+Pygments==2.2.0
+
