@@ -4,7 +4,7 @@ from __future__ import unicode_literals
 from django.contrib.auth.models import User, Group
 from rest_framework import viewsets
 
-from rest_api.serializers import UserSerializer, GroupSerializer
+from rest_api.users_api.serializers import UserSerializer, GroupSerializer
 
 # Create your views here.
 
