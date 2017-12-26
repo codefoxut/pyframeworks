@@ -25,7 +25,7 @@ urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^accounts/login/$', auth_views.login, name='login'),
     url(r'^accounts/logout/$', auth_views.logout, name='logout', kwargs={'next_page': '/post/'}),
-    url(r'^api/rf/', include('rest_api.urls')),
+    url(r'^api/', include('rest_api.urls')),
     url(r'^api-auth/', include('rest_framework.urls', namespace='rest_framework'))
 
 ]

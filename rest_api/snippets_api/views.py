@@ -10,13 +10,15 @@ from rest_framework import mixins
 from rest_framework import permissions
 from rest_framework import renderers
 from rest_framework import status
-from rest_framework.decorators import api_view
+from rest_framework import viewsets
+from rest_framework.decorators import api_view, detail_route
 from rest_framework.parsers import JSONParser
 from rest_framework.response import Response
 from rest_framework.reverse import reverse
 from rest_framework.views import APIView
 
-from rest_api.snippets_api.serializers import SnippetSerializer, SnippetUserSerializer
+from rest_api.snippets_api.serializers import SnippetSerializer, \
+    SnippetUserSerializer
 from rest_api.snippets_api.permissions import IsOwnerOrReadOnly
 from snippets.models import Snippet
 
@@ -27,8 +29,36 @@ from snippets.models import Snippet
 def api_root(request, format=None):
     return Response({
         'users': reverse('snippet-user-list', request=request, format=format),
-        'snippets': reverse('snippets-list', request=request, format=format)
+        'snippets': reverse('snippet-list', request=request, format=format)
     })
+
+class SnippetViewSet(viewsets.ModelViewSet):
+    """
+    This viewset automatically provides `list`, `create`, `retrieve`,
+    `update` and `destroy` actions.
+
+    Additionally we also provide an extra `highlight` action.
+    """
+    queryset = Snippet.objects.all()
+    serializer_class = SnippetSerializer
+    permission_classes = (permissions.IsAuthenticatedOrReadOnly,
+                          IsOwnerOrReadOnly,)
+
+    @detail_route(renderer_classes=[renderers.StaticHTMLRenderer])
+    def highlight(self, request, *args, **kwargs):
+        snippet = self.get_object()
+        return Response(snippet.highlighted)
+
+    def perform_create(self, serializer):
+        serializer.save(owner=self.request.user)
+
+
+class SnippetUserViewSet(viewsets.ReadOnlyModelViewSet):
+    """
+    This viewset automatically provides `list` and `detail` actions.
+    """
+    queryset = User.objects.all()
+    serializer_class = SnippetUserSerializer
 
 
 class SnippetHighlight(generics.GenericAPIView):
