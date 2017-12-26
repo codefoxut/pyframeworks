@@ -2,33 +2,21 @@ from django.conf.urls import url, include
 from rest_framework import routers
 from rest_framework.urlpatterns import format_suffix_patterns
 
-from rest_api.users_api import views
-from rest_api.snippets_api import views as snippets_views
+from rest_api.users_api.views import UserViewSet, GroupViewSet
+from rest_api.snippets_api.views import SnippetViewSet, SnippetUserViewSet
 
+# Create a router and register our viewsets with it.
 router = routers.DefaultRouter()
-router.register(r'users', views.UserViewSet)
-router.register(r'groups', views.GroupViewSet)
+
+router.register(r'auth-users', UserViewSet)
+router.register(r'auth-groups', GroupViewSet)
+router.register(r'users', SnippetUserViewSet)
+
+router.register(r'snippets', SnippetViewSet)
 
 # Wire up our API using automatic URL routing.
 # Additionally, we include login URLs for the browsable API.
 urlpatterns = [
-    # url(r'^', include(router.urls)),
-    url(r'^snippets/', include('rest_api.snippets_api.urls')),
+    url(r'^', include(router.urls)),
+    url(r'^drf/', include('rest_api.snippets_api.urls')),
 ]
-
-snippets_urls = [
-    url(r'^$', snippets_views.api_root),
-    url(r'^snippets/$',
-        snippets_views.SnippetList.as_view(), name='snippet-list'),
-    url(r'^snippets/(?P<pk>[0-9]+)/$',
-        snippets_views.SnippetDetail.as_view(), name='snippet-detail'),
-    url(r'^snippets/(?P<pk>[0-9]+)/highlight/$',
-        snippets_views.SnippetHighlight.as_view(), name='snippet-highlight'),
-    url(r'^users/$', snippets_views.UserList.as_view(), ),
-    url(r'^users/(?P<pk>[0-9]+)/$', snippets_views.UserDetail.as_view()),
-
-]
-
-snippets_urls = format_suffix_patterns(snippets_urls)
-
-urlpatterns += snippets_urls
