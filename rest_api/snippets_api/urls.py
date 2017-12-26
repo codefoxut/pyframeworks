@@ -1,11 +1,15 @@
-from django.conf.urls import url
+from django.conf.urls import url, include
 from rest_framework import renderers
+from rest_framework import routers
 from rest_framework.urlpatterns import format_suffix_patterns
 
 from rest_api.snippets_api import views as snippets_views
 from rest_api.snippets_api.views import SnippetViewSet, SnippetUserViewSet
 
-
+# Create a router and register our viewsets with it.
+router = routers.DefaultRouter()
+router.register(r'users', SnippetUserViewSet)
+router.register(r'snippets', SnippetViewSet)
 
 
 snippet_list = SnippetViewSet.as_view({
@@ -75,3 +79,8 @@ url(r'^snippets/v5/$',
 ]
 
 urlpatterns = format_suffix_patterns(urlpatterns)
+
+
+urlpatterns += [
+    url(r'^', include(router.urls)),
+]

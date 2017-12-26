@@ -11,7 +11,6 @@ router = routers.DefaultRouter()
 router.register(r'auth-users', UserViewSet)
 router.register(r'auth-groups', GroupViewSet)
 router.register(r'users', SnippetUserViewSet)
-
 router.register(r'snippets', SnippetViewSet)
 
 # Wire up our API using automatic URL routing.
