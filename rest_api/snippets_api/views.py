@@ -27,7 +27,7 @@ from snippets.models import Snippet
 def api_root(request, format=None):
     return Response({
         'users': reverse('snippet-user-list', request=request, format=format),
-        'snippets': reverse('snippets-list', request=request, format=format)
+        'snippets': reverse('snippet-list', request=request, format=format)
     })
 
 

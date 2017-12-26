@@ -18,10 +18,13 @@ urlpatterns = [
 
 snippets_urls = [
     url(r'^$', snippets_views.api_root),
-    url(r'^snippets/$', snippets_views.SnippetList.as_view(), name='snippets-list'),
-    url(r'^snippets/(?P<pk>[0-9]+)/$', snippets_views.SnippetDetail.as_view()),
-    url(r'^snippets/(?P<pk>[0-9]+)/highlight/$', snippets_views.SnippetHighlight.as_view()),
-    url(r'^users/$', snippets_views.UserList.as_view()),
+    url(r'^snippets/$',
+        snippets_views.SnippetList.as_view(), name='snippet-list'),
+    url(r'^snippets/(?P<pk>[0-9]+)/$',
+        snippets_views.SnippetDetail.as_view(), name='snippet-detail'),
+    url(r'^snippets/(?P<pk>[0-9]+)/highlight/$',
+        snippets_views.SnippetHighlight.as_view(), name='snippet-highlight'),
+    url(r'^users/$', snippets_views.UserList.as_view(), ),
     url(r'^users/(?P<pk>[0-9]+)/$', snippets_views.UserDetail.as_view()),
 
 ]
