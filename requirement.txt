@@ -20,3 +20,21 @@ coverage==4.4.1
 # Code Highlighting
 Pygments==2.2.0
 
+# MarkDown
+Markdown==2.6.10
+
+# Coreapi and dependencies
+certifi==2017.11.5
+chardet==3.0.4
+coreapi==2.3.3
+coreschema==0.0.4
+idna==2.6
+itypes==1.1.0
+Jinja2==2.10
+MarkupSafe==1.0
+requests==2.18.4
+uritemplate==3.0.0
+urllib3==1.22
+# Coreapi_cli
+click==6.7
+coreapi-cli==1.0.6
