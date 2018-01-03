@@ -10,6 +10,5 @@ class SimpleSerializer(serializers.Serializer):
     language = serializers.ChoiceField(choices=LANGUAGE_CHOICES, default='urdu')
 
     def create(self, validated_data):
-        import pdb; pdb.set_trace()
         """ Create new instance of simpleclass"""
         return SimpleClass(**validated_data)

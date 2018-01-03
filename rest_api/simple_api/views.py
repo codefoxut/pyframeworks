@@ -27,7 +27,6 @@ def hello_world(request):
 @api_view(['GET', 'POST' ])
 def simple_list(request):
     """Simple list of names, country and language."""
-    import pdb; pdb.set_trace()
     if request.method == 'POST':
         data = JSONParser().parse(request)
         serializer = SimpleSerializer(data=data)
