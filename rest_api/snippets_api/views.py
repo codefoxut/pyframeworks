@@ -18,7 +18,7 @@ from rest_framework.reverse import reverse
 from rest_framework.views import APIView
 
 from rest_api.snippets_api.serializers import SnippetSerializer, \
-    SnippetUserSerializer
+    SnippetUserSerializer, SnippetSerializerSimple, SnippetSerializerModel, SnippetUserSerializerModel
 from rest_api.snippets_api.permissions import IsOwnerOrReadOnly
 from snippets.models import Snippet
 
@@ -69,10 +69,12 @@ class SnippetHighlight(generics.GenericAPIView):
         snippet = self.get_object()
         return Response(snippet.highlighted)
 
+################### version: 5 (generics) ################
+
 
 class SnippetList(generics.ListCreateAPIView):
     queryset = Snippet.objects.all()
-    serializer_class = SnippetSerializer
+    serializer_class = SnippetSerializerModel
     permission_classes = (permissions.IsAuthenticatedOrReadOnly,)
 
     def perform_create(self, serializer):
@@ -81,19 +83,19 @@ class SnippetList(generics.ListCreateAPIView):
 
 class SnippetDetail(generics.RetrieveUpdateDestroyAPIView):
     queryset = Snippet.objects.all()
-    serializer_class = SnippetSerializer
+    serializer_class = SnippetSerializerModel
     permission_classes = (permissions.IsAuthenticatedOrReadOnly,
                           IsOwnerOrReadOnly)
 
 
 class UserList(generics.ListAPIView):
     queryset = User.objects.all()
-    serializer_class = SnippetUserSerializer
+    serializer_class = SnippetUserSerializerModel
 
 
 class UserDetail(generics.RetrieveAPIView):
     queryset = User.objects.all()
-    serializer_class = SnippetUserSerializer
+    serializer_class = SnippetUserSerializerModel
 
 
 # ################# version: 4(Mixin) ##############
@@ -101,7 +103,7 @@ class SnippetListMixin(mixins.ListModelMixin,
                   mixins.CreateModelMixin,
                   generics.GenericAPIView):
     queryset = Snippet.objects.all()
-    serializer_class = SnippetSerializer
+    serializer_class = SnippetSerializerModel
     permission_classes = (permissions.IsAuthenticatedOrReadOnly,)
 
     def get(self, request, *args, **kwargs):
@@ -116,7 +118,7 @@ class SnippetDetailMixin(mixins.RetrieveModelMixin,
                     mixins.DestroyModelMixin,
                     generics.GenericAPIView):
     queryset = Snippet.objects.all()
-    serializer_class = SnippetSerializer
+    serializer_class = SnippetSerializerModel
     permission_classes = (permissions.IsAuthenticatedOrReadOnly,)
 
     def get(self, request, *args, **kwargs):
@@ -137,11 +139,11 @@ class SnippetListAPIView(APIView):
     """
     def get(self, request, format=None):
         snippets = Snippet.objects.all()
-        serializer = SnippetSerializer(snippets, many=True)
+        serializer = SnippetSerializerModel(snippets, many=True)
         return Response(serializer.data)
 
     def post(self, request, format=None):
-        serializer = SnippetSerializer(data=request.data)
+        serializer = SnippetSerializerModel(data=request.data)
         if serializer.is_valid():
             serializer.save()
             return Response(serializer.data, status=status.HTTP_201_CREATED)
@@ -160,12 +162,12 @@ class SnippetDetailAPIView(APIView):
 
     def get(self, request, pk, format=None):
         snippet = self.get_object(pk)
-        serializer = SnippetSerializer(snippet)
+        serializer = SnippetSerializerModel(snippet)
         return Response(serializer.data)
 
     def put(self, request, pk, format=None):
         snippet = self.get_object(pk)
-        serializer = SnippetSerializer(snippet, data=request.data)
+        serializer = SnippetSerializerModel(snippet, data=request.data)
         if serializer.is_valid():
             serializer.save()
             return Response(serializer.data)
@@ -186,11 +188,11 @@ def snippet_list2(request, format=None):
     """
     if request.method == 'GET':
         snippets = Snippet.objects.all()
-        serializer = SnippetSerializer(snippets, many=True)
+        serializer = SnippetSerializerModel(snippets, many=True)
         return Response(serializer.data)
 
     elif request.method == 'POST':
-        serializer = SnippetSerializer(data=request.data)
+        serializer = SnippetSerializerModel(data=request.data)
         if serializer.is_valid():
             serializer.save()
             return Response(serializer.data, status=status.HTTP_201_CREATED)
@@ -208,11 +210,11 @@ def snippet_detail2(request, pk, format=None):
         return Response(status=status.HTTP_404_NOT_FOUND)
 
     if request.method == 'GET':
-        serializer = SnippetSerializer(snippet)
+        serializer = SnippetSerializerModel(snippet)
         return Response(serializer.data)
 
     elif request.method == 'PUT':
-        serializer = SnippetSerializer(snippet, data=request.data)
+        serializer = SnippetSerializerModel(snippet, data=request.data)
         if serializer.is_valid():
             serializer.save()
             return Response(serializer.data)
@@ -232,12 +234,12 @@ def snippet_list1(request):
     """
     if request.method == 'GET':
         snippets = Snippet.objects.all()
-        serializer = SnippetSerializer(snippets, many=True)
+        serializer = SnippetSerializerSimple(snippets, many=True)
         return JsonResponse(serializer.data, safe=False)
 
     elif request.method == 'POST':
         data = JSONParser().parse(request)
-        serializer = SnippetSerializer(data=data)
+        serializer = SnippetSerializerSimple(data=data)
         if serializer.is_valid():
             serializer.save()
             return JsonResponse(serializer.data, status=status.HTTP_201_CREATED)
@@ -255,12 +257,12 @@ def snippet_detail1(request, pk):
         return HttpResponse(status=status.HTTP_404_NOT_FOUND)
 
     if request.method == 'GET':
-        serializer = SnippetSerializer(snippet)
+        serializer = SnippetSerializerSimple(snippet)
         return JsonResponse(serializer.data)
 
     elif request.method == 'PUT':
         data = JSONParser().parse(request)
-        serializer = SnippetSerializer(snippet, data=data)
+        serializer = SnippetSerializerSimple(snippet, data=data)
         if serializer.is_valid():
             serializer.save()
             return JsonResponse(serializer.data)

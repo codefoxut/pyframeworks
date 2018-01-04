@@ -5,6 +5,8 @@ from rest_framework.schemas import get_schema_view
 from rest_api.users_api.views import UserViewSet, GroupViewSet
 from rest_api.snippets_api.views import SnippetViewSet, SnippetUserViewSet
 
+from simple_api import views as simple_views
+
 # Create a router and register our viewsets with it.
 router = routers.DefaultRouter()
 
@@ -23,4 +25,6 @@ urlpatterns = [
     url(r'^schema/$', schema_view),
     url(r'^', include(router.urls)),
     url(r'^drf/', include('rest_api.snippets_api.urls')),
+    url(r'^simple/', include('rest_api.simple_api.urls')),
+
 ]
