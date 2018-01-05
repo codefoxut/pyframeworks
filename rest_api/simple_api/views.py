@@ -3,6 +3,8 @@ from rest_framework.renderers import JSONRenderer
 from rest_framework.parsers import JSONParser
 from rest_framework.response import Response
 from rest_framework.reverse import reverse
+from rest_framework import status
+from django.views.decorators.csrf import csrf_exempt
 
 from django.http import JsonResponse
 
@@ -23,16 +25,16 @@ def hello_world(request):
         return Response({"message": "Got some data!", "data": request.data})
     return Response({"message": "Hello, world!"})
 
-
-@api_view(['GET', 'POST' ])
+@csrf_exempt
+@api_view(['GET', 'POST' , 'PUT'])
 def simple_list(request):
     """Simple list of names, country and language."""
     if request.method == 'POST':
-        data = JSONParser().parse(request)
-        serializer = SimpleSerializer(data=data)
+        # data = JSONParser().parse(request)
+        serializer = SimpleSerializer(data=request.data)
         if serializer.is_valid():
             serializer.save()
-            return JsonResponse(serializer.data, status=status.HTTP_201_CREATED)
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
     my_data = [SimpleClass('ross', 'us', 'urdu'), SimpleClass('ujjwal', 'india', 'english')]
     results = SimpleSerializer(my_data, many=True)
     return Response(results.data)

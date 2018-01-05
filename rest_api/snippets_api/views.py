@@ -52,6 +52,19 @@ class SnippetViewSet(viewsets.ModelViewSet):
     def perform_create(self, serializer):
         serializer.save(owner=self.request.user)
 
+    def get(self, ):
+        pass
+
+    def get_queryset(self):
+        queryset = self.queryset
+        query_params = dict(self.request.query_params.items())
+        if 'language' in query_params and query_params['language']:
+            queryset = queryset.filter(language=query_params['language'])
+        return queryset
+
+
+
+
 
 class SnippetUserViewSet(viewsets.ReadOnlyModelViewSet):
     """
