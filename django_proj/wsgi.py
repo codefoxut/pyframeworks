@@ -17,6 +17,7 @@ if PROJECT_DIR not in sys.path:
     sys.path.insert(0, PROJECT_DIR)
 if BASE_DIR not in sys.path:
     sys.path.insert(1, BASE_DIR)
+sys.path.insert(2, '/Users/ujjwal/Workspace/ENV/dj11/')
 
 from django.core.wsgi import get_wsgi_application
 
