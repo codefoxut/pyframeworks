@@ -131,10 +131,10 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 MEDIA_URL = '/'
-STATIC_ROOT = PROJECT_DIR + '/static/'
+STATIC_ROOT = BASE_DIR + '/static/'
 
 STATICFILES_DIRS = [
-    #os.path.join(PROJECT_DIR, "static"),
+    os.path.join(PROJECT_DIR, "static"),
 ]
 
 LOGIN_REDIRECT_URL = '/post/'
