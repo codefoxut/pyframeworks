@@ -1,0 +1,6 @@
+-c fastapi_constraints.txt
+
+wheel
+fastapi[all]
+pydantic
+python-multipart

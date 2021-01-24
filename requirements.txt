@@ -1,0 +1,3 @@
+
+-r pip/fastapi_req.txt
+
