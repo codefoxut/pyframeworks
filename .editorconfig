@@ -1,0 +1,71 @@
+# EditorConfig is awesome: http://EditorConfig.org
+
+# top-most EditorConfig file
+root = true
+
+# Unix-style newlines with a newline ending every file
+[*]
+end_of_line = lf
+insert_final_newline = true
+trim_trailing_whitespace = true
+
+# Matches multiple files with brace expansion notation
+# Set default charset
+
+
+# 4 space indentation
+[*.py]
+charset = utf-8
+indent_style = space
+indent_size = 4
+max_line_length = 99
+
+[*.{proto,kv}]
+indent_size = 4
+indent_style = tab
+charset = utf-8
+
+[*.{html,css,js}]
+indent_style = space
+indent_size = 2
+charset = utf-8
+
+# Minified JavaScript files shouldn't be changed
+[**.min.js]
+indent_style = unset
+insert_final_newline = unset
+
+[*.{json,sh,txt}]
+indent_style = space
+indent_size = 2
+max_line_length = 1000
+
+[Dockerfile]
+indent_style = space
+indent_size = 2
+max_line_length = 1000
+
+[DockerfileDevelopment]
+indent_style = space
+indent_size = 2
+max_line_length = 1000
+
+[*.{yml,ini,conf,cfg}]
+indent_style = space
+indent_size = 2
+max_line_length = 1000
+
+[*.{cfg,}]
+indent_style = tab
+trim_trailing_whitespace = false
+
+
+[*.{md,rst}]
+indent_style = space
+indent_size = 4
+trim_trailing_whitespace = false
+
+[Makefile]
+indent_style = tab
+indent_size = 2
+max_line_length = 1000
