@@ -107,6 +107,9 @@ django_proj/settings/dev.py
 .DS_Store
 */migrations/*
 
+__pypackages__/
+.pdm.toml
+
 
 # Created by https://www.toptal.com/developers/gitignore/api/reactnative,node
 # Edit at https://www.toptal.com/developers/gitignore?templates=reactnative,node
