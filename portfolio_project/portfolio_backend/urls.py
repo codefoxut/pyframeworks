@@ -19,7 +19,7 @@ from rest_framework import routers
 from backend.api import ProjectInfoViewSet
 
 router = routers.DefaultRouter()
-router.register('api/projects',ProjectInfoViewSet)
+router.register('api/projects', ProjectInfoViewSet)
 
 urlpatterns = router.urls
 
