@@ -6,7 +6,7 @@ __all__ = ['index', 'detail', 'results', 'vote']
 
 from django.shortcuts import render
 from django.http import HttpResponse
-from django.utils.html import escape
+from html import escape
 
 # Create your views here.
 def index(request):
