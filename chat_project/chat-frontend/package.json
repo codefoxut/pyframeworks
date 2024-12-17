@@ -26,7 +26,6 @@
     "ansi-html": "^0.0.8"
   },
   "scripts": {
-    "xxpreinstall": "npx npm-force-resolutions",
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
